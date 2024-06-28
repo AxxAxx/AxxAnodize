@@ -1,8 +1,9 @@
 import argparse
 import sys
 
-def main():
+feet_per_mm = 0.00328083989
 
+def main():
     '''Console script'''
     parser = argparse.ArgumentParser()
 
@@ -17,32 +18,28 @@ def main():
 
     args = parser.parse_args()
 
-############################################################
+    ############################################################
     
-    feet_per_mm = 0.00328083989
-
     square_feet = args.surfacearea*feet_per_mm**2
     
     setcurrent = square_feet * args.currentdensity
     time =  720 * args.thickness / args.currentdensity
-    #time = 2 # TEMP
     peakvoltage = 2.5 * args.currentdensity
     print ('\033[91m')
     print('='*40) 
-    print('          Anodizing recipie')
+    print('          Anodizing Calculator')
     print('          Axel Johansson V1.4')
     print('='*40)
     print ('\033[0m')    
-    print(' Part Surface Area:\033[4m\t%.1f\033[0m mm^2' % (args.surfacearea))
-    print(' Set Current:\033[4m\t\t%.2f\033[0m Ampere' % (setcurrent))
+    print(' Part Surface Area:\t%.1f mm^2' % (args.surfacearea))
+    print(' Set Current:\033[91m\033[1m\t\t%.2f\033[0m Ampere' % (setcurrent))
     print(' Time:\t\t\t%.1f Minutes' % (time))
     print(' Peak voltage:\t\t%.1f Vdc' % (peakvoltage))
-    print(' Oxide thickness:\t%.1f micrometer' % (args.thickness*25.4))
+    print(' Oxide thickness:\t%.1f micrometer (%.1f mil)' % (args.thickness*25.4, args.thickness))
     print('-'*40)
     print(' REMEMBER:\n (+) Goes to the Part\n (-) Goes to the Cathode')
     print('-'*40)
     print('')
-    #print ('\033[0m')
-###########################################################    
+
 if __name__ == "__main__":
     main()
